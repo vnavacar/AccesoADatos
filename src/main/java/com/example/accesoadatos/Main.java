@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 public class Main {
 
-
+    static ListaDeObjetos lista;
     public static void main(String[] args){
 
-        ListaDeObjetos lista = new ListaDeObjetos(10);
+        lista = new ListaDeObjetos(10);
 
         inicializarLista(lista);
         Scanner sc = new Scanner(System.in);
@@ -45,15 +45,29 @@ public class Main {
         lista.add(o9);
         lista.add(o10);
     }
+/*
+    public static ListaDeObjetos lanzarLista() {
+        ListaDeObjetos lista = new ListaDeObjetos(10);
+        try {
+            FileInputStream fis = new FileInputStream("lista.obj");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            lista = (ListaDeObjetos) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
+        return lista;
+    }*/
 
     public static void printMenu(){
         System.out.println("1. Crear objeto");
         System.out.println("2. Leer objeto");
         System.out.println("3. Actualizar objeto");
         System.out.println("4. Borrar objeto");
-        System.out.println("5. Salir");
+        System.out.println("5. Listar objetos");
+        System.out.println("6. Salir");
     }
     public static void menu(Scanner sc){
         int opcion = 0;
@@ -62,19 +76,28 @@ public class Main {
             opcion = sc.nextInt();
             switch(opcion){
                 case 1:
-                    crearObjeto();
+                    //crearObjeto();
+
                     break;
                 case 2:
-                    leerObjeto();
+                    //leerObjeto();
                     break;
                 case 3:
-                    actualizarObjeto();
+                    //actualizarObjeto();
                     break;
                 case 4:
-                    borrarObjeto();
+                    //borrarObjeto();
                     break;
                 case 5:
+                    //imprimirLista();
+                    lista.print();
+                    break;
+                case 6:
                     System.out.println("Saliendo...");
+                    break;
+                case 7:
+                    //guardarLista();
+                    serializarObjeto(lista);
                     break;
                 default:
                     System.out.println("Opción no válida");
