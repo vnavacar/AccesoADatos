@@ -75,6 +75,7 @@ public class Main {
                     break;
                 case 3:
                     //actualizarObjeto();
+                    modificarObjeto(sc);
                     break;
                 case 4:
                     //borrarObjeto();
@@ -147,5 +148,48 @@ public class Main {
         System.out.println("Introduce el float del objeto");
         o.setValorFloat(sc.nextFloat());
         return o;
+    }
+    public static void modificarObjeto(Scanner scanner){
+
+        System.out.println("Introduce el id del objeto a modificar");
+        int id = scanner.nextInt();
+        System.out.println(lista.get(id).toString());
+        System.out.println("Elige el elemento a modificar");
+        System.out.println("1. Nombre");
+        System.out.println("2. Descripción");
+        System.out.println("3. Id");
+        System.out.println("4. Valor float");
+        int opcion = scanner.nextInt();
+        switch (opcion){
+            case 1:
+                System.out.println("Introduce el nuevo nombre");
+                String nombre = scanner.nextLine();
+                nombre = scanner.nextLine(); //Se salta el primer nextline
+                lista.get(id).setNombre(nombre);
+                break;
+            case 2:
+                System.out.println("Introduce la nueva descripción");
+                String descripcion = scanner.nextLine();
+                descripcion = scanner.nextLine(); //Se salta el primer nextline
+                lista.get(id).setDescripcion(descripcion);
+                break;
+            case 3:
+                System.out.println("Introduce el nuevo id");
+                int id2 = scanner.nextInt();
+                lista.get(id).setId(id2);
+                break;
+            case 4:
+                System.out.println("Introduce el nuevo valor float");
+                float valorFloat = scanner.nextFloat();
+                lista.get(id).setValorFloat(valorFloat);
+                break;
+            default:
+                System.out.println("Opción no válida");
+        }
+        //lista.get(id).setNombre("Objeto modificado");
+        serializarObjeto(lista);
+
+
+
     }
 }
