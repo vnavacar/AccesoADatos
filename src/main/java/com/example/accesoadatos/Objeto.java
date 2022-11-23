@@ -2,8 +2,9 @@ package com.example.accesoadatos;
 
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Objeto {
+public class Objeto implements Serializable {
     private String nombre;
     private String Descripcion;
     private int id;

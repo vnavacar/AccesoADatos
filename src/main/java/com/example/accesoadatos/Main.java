@@ -12,9 +12,11 @@ import java.util.Scanner;
 public class Main {
 
     static ListaDeObjetos lista;
+    //static ListaDeObjetos lista=new ListaDeObjetos(10);
+    //lista = new ListaDeObjetos(10);
     public static void main(String[] args){
 
-        lista = new ListaDeObjetos(10);
+        //lista = new ListaDeObjetos(10);
         Leerlista();
 
         Scanner sc = new Scanner(System.in);
@@ -25,6 +27,7 @@ public class Main {
 
     public static void inicializarLista(ListaDeObjetos lista){
         //ListaDeObjetos lista = new ListaDeObjetos(10);
+
         Objeto o1 = new Objeto("Objeto 1", "Descripcion 1", 1, null, 1.0f);
         Objeto o2 = new Objeto("Objeto 2", "Descripcion 2", 2, null, 2.0f);
         Objeto o3 = new Objeto("Objeto 3", "Descripcion 3", 3, null, 3.0f);
@@ -117,6 +120,7 @@ public class Main {
             fis.close();
             temp.print();
         }catch(Exception e){
+            System.out.println(e);
             System.out.printf("Error al deserializar el objeto");
         }
         return temp;
@@ -125,6 +129,7 @@ public class Main {
         lista = deserializarObjeto();
         if (lista == null){
             System.out.println("No hay lista, se creará una nueva");
+            lista = new ListaDeObjetos(10);
             inicializarLista(lista);
             serializarObjeto(lista);
             System.out.println("Lista creada");
