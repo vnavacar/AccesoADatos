@@ -15,11 +15,12 @@ public class Main {
     public static void main(String[] args){
 
         lista = new ListaDeObjetos(10);
+        Leerlista();
 
-        inicializarLista(lista);
         Scanner sc = new Scanner(System.in);
 
         menu(sc);
+        sc.close();
     }
 
     public static void inicializarLista(ListaDeObjetos lista){
@@ -45,21 +46,7 @@ public class Main {
         lista.add(o9);
         lista.add(o10);
     }
-/*
-    public static ListaDeObjetos lanzarLista() {
-        ListaDeObjetos lista = new ListaDeObjetos(10);
-        try {
-            FileInputStream fis = new FileInputStream("lista.obj");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            lista = (ListaDeObjetos) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return lista;
-    }*/
 
     public static void printMenu(){
         System.out.println("1. Crear objeto");
@@ -77,7 +64,8 @@ public class Main {
             switch(opcion){
                 case 1:
                     //crearObjeto();
-
+                    lista.add(crearObjeto());
+                    serializarObjeto(lista);
                     break;
                 case 2:
                     //leerObjeto();
@@ -102,12 +90,12 @@ public class Main {
                 default:
                     System.out.println("Opción no válida");
             }
-        }while(opcion != 5);
+        }while(opcion != 6);
     }
     public static void serializarObjeto(ListaDeObjetos lista){
 
         try{
-            FileOutputStream fos = new FileOutputStream("lista.obj");
+            FileOutputStream fos = new FileOutputStream("lista.obj",false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lista);
             oos.close();
@@ -120,16 +108,39 @@ public class Main {
     }
 
     public static ListaDeObjetos deserializarObjeto(){
-        ListaDeObjetos lista = null;
+        ListaDeObjetos temp = null;
         try{
             FileInputStream fis = new FileInputStream("lista.obj");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            lista = (ListaDeObjetos) ois.readObject();
+            temp = (ListaDeObjetos) ois.readObject();
             ois.close();
             fis.close();
+            temp.print();
         }catch(Exception e){
             System.out.printf("Error al deserializar el objeto");
         }
-        return lista;
+        return temp;
+    }
+    public static void Leerlista(){
+        lista = deserializarObjeto();
+        if (lista == null){
+            System.out.println("No hay lista, se creará una nueva");
+            inicializarLista(lista);
+            serializarObjeto(lista);
+            System.out.println("Lista creada");
+        }
+    }
+    public static Objeto crearObjeto(){
+        Objeto o = new Objeto();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el nombre del objeto");
+        o.setNombre(sc.nextLine());
+        System.out.println("Introduce la descripción del objeto");
+        o.setDescripcion(sc.nextLine());
+        System.out.println("Introduce el id del objeto");
+        o.setId(sc.nextInt());
+        System.out.println("Introduce el float del objeto");
+        o.setValorFloat(sc.nextFloat());
+        return o;
     }
 }

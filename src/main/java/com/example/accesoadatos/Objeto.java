@@ -11,6 +11,8 @@ public class Objeto {
     private BufferedImage imagen;
     private float valorFloat;
 
+    public Objeto() {
+    }
 
     public Objeto(String nombre, String Descripcion, int id, BufferedImage imagen, float valorFloat) {
         this.nombre = nombre;
