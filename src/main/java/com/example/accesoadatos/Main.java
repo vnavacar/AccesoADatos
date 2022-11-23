@@ -67,11 +67,19 @@ public class Main {
             switch(opcion){
                 case 1:
                     //crearObjeto();
-                    lista.add(crearObjeto());
-                    serializarObjeto(lista);
+                    if(lista.getNumObjetos()<10){
+                        lista.add(crearObjeto());
+                        serializarObjeto(lista);
+                    }else{
+                        System.out.println("No se pueden crear mas objetos, borra alguno para reducir el tamaño de la lista bajo 10");
+                    }
                     break;
                 case 2:
                     //leerObjeto();
+                    System.out.println("Introduce el id del objeto a leer");
+                    int id = sc.nextInt();
+                    Objeto o = lista.get(id);
+                    System.out.println(o.toString());
                     break;
                 case 3:
                     //actualizarObjeto();
@@ -79,6 +87,9 @@ public class Main {
                     break;
                 case 4:
                     //borrarObjeto();
+                    borrarObjeto();
+                    serializarObjeto(lista);
+
                     break;
                 case 5:
                     //imprimirLista();
@@ -148,6 +159,12 @@ public class Main {
         System.out.println("Introduce el float del objeto");
         o.setValorFloat(sc.nextFloat());
         return o;
+    }
+    public static void borrarObjeto(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el id del objeto a borrar");
+        int id = sc.nextInt();
+        lista.remove(id);
     }
     public static void modificarObjeto(Scanner scanner){
 

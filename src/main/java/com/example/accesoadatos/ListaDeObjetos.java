@@ -38,6 +38,9 @@ public class ListaDeObjetos implements Serializable {
         }
         return null;
     }
+    public int getNumObjetos() {
+        return numObjetos;
+    }
 
     public void update(Objeto o){
         for(int i = 0; i < numObjetos; i++){
